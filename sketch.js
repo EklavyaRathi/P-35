@@ -3,11 +3,11 @@ var database;
 var height;
 
 function preload(){
-   bg =loadImage("Images/cityImage.png");
-   balloonImage1=loadAnimation("Images/HotAirBallon01.png");
-   balloonImage2=loadAnimation("Images/HotAirBallon01.png","Images/HotAirBallon01.png",
-   "Images/HotAirBallon01.png","Images/HotAirBallon02.png","Images/HotAirBallon02.png",
-   "Images/HotAirBallon02.png","Images/HotAirBallon03.png","Images/HotAirBallon03.png","Images/HotAirBallon03.png");
+  bg =loadImage("Images/cityImage.png");
+  balloonImage1=loadAnimation("Images/HotAirBallon01.png");
+  balloonImage2=loadAnimation("Images/HotAirBallon01.png","Images/HotAirBallon01.png",
+  "Images/HotAirBallon01.png","Images/HotAirBallon02.png","Images/HotAirBallon02.png",
+  "Images/HotAirBallon02.png","Images/HotAirBallon03.png","Images/HotAirBallon03.png","Images/HotAirBallon03.png");
   }
 
 //Function to set initial environment
@@ -23,9 +23,7 @@ function setup() {
 
   var balloonHeight=database.ref('balloon/height');
   balloonHeight.on("value",readHeight, showError);
-
-
-
+  
   textSize(20); 
 }
 
@@ -33,14 +31,12 @@ function setup() {
 function draw() {
   background(bg);
 
-  
-
   if(keyDown(LEFT_ARROW)){
     updateHeight(-10,0);
     balloon.addAnimation("hotAirBalloon",balloonImage2);
   }
   else if(keyDown(RIGHT_ARROW)){
-    updateHeight(+10,0);
+    updateHeight(10,0);
     balloon.addAnimation("hotAirBalloon",balloonImage2);
   }
   else if(keyDown(UP_ARROW)){
@@ -64,8 +60,8 @@ function draw() {
 
  function updateHeight(x,y){
    database.ref('balloon/height').set({
-     x: height.x + x ,
-     y: height.y + y
+     'x': height.x + x ,
+     'y': height.y + y
    })
  }
 
@@ -77,10 +73,11 @@ function draw() {
  //}
 
  function readHeight(data){
-   height = data.val();
-   balloon.x = height.x;
-    balloon.y = height.y;
-  }
+  height = data.val();
+  console.log(height.x);
+  balloon.x = height.x;
+  balloon.y = height.y;
+}
 
  //function readHeight(data){
  //  height = data.val();
